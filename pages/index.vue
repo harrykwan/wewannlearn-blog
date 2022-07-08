@@ -1,13 +1,29 @@
 <template>
-  <main>
-    <section class="self-center flex flex-col flex-1 items-center justify-center">
-      <h1 class="title text-center">Nuxt — Tailwind — Netlify CMS</h1>
-      <h2 class="subtitle text-center">Boilerplate</h2>
+  <div>
+    <Header />
+    <Trigobg />
+    <section v-if="posts" class="w-full max-w-5xl mx-auto">
+      <posts post-type="blog" :amount="100" />
     </section>
-
-    <section class="mt-8">
-      <h3 class="text-primary-600 dark:text-primary-400 max-w-5xl mx-auto">Latest blog post</h3>
-      <posts post-type="blog" :amount="1" />
-    </section>
-  </main>
+    <Footer />
+  </div>
 </template>
+
+<script>
+import Header from '~/components/Header.vue'
+import Footer from '~/components/Footer.vue'
+import Trigobg from '~/components/Trigobg.vue'
+
+export default {
+  async asyncData({ $content, error }) {
+    let posts
+    try {
+      posts = await $content('blog').fetch()
+    } catch (e) {
+      error({ message: 'Blog posts not found' })
+    }
+    return { posts }
+  },
+  components: { Header, Footer, Trigobg },
+}
+</script>

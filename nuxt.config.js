@@ -7,7 +7,7 @@ export default {
   target: 'static',
   components: true,
   generate: {
-    fallback: true
+    fallback: true,
   },
   // ? The env Property: https://nuxtjs.org/api/configuration-env/
   env: {
@@ -15,7 +15,7 @@ export default {
       process.env.NODE_ENV === 'production'
         ? process.env.URL || 'http://createADotEnvFileAndSetURL'
         : 'http://localhost:3000',
-    lang: SITE_INFO.sitelang || 'en-US'
+    lang: SITE_INFO.sitelang || 'en-US',
   },
   /*
    ** Headers of the page
@@ -28,43 +28,74 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: SITE_INFO.sitedescription || process.env.npm_package_description || ''
-      }
+        content: SITE_INFO.sitedescription || process.env.npm_package_description || '',
+      },
+      {
+        property: 'og:image:width',
+        content: '1600',
+      },
+      {
+        property: 'og:image:height',
+        content: '1000',
+      },
+
+      {
+        property: 'og:image',
+        content: 'https://imagedelivery.net/F-3JVW4H1_xFj9Tfzrx6uA/52659533-6ad6-49c9-6e50-66cd4c83d500/public',
+      },
     ],
     link: [
       {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: true
+        rel: 'stylesheet',
+        href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        integrity: 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
+        crossorigin: 'anonymous',
       },
       {
-        rel: 'preload',
-        as: 'style',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap'
+        href: 'https://unpkg.com/aos@2.3.1/dist/aos.css',
+        rel: 'stylesheet',
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap',
-        media: 'print',
-        onload: `this.media='all'`
-      }
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+        integrity: 'sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==',
+        crossorigin: 'anonymous',
+        referrerpolicy: 'no-referrer',
+      },
+      // {
+      //   rel: 'preconnect',
+      //   href: 'https://fonts.gstatic.com',
+      //   crossorigin: true,
+      // },
+      // {
+      //   rel: 'preload',
+      //   as: 'style',
+      //   href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap',
+      // },
+      // {
+      //   rel: 'stylesheet',
+      //   href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap',
+      //   media: 'print',
+      //   onload: `this.media='all'`,
+      // },
     ], // ? Imports the font 'Inter', can be optimized by the netlify plugin 'Subfont' by uncommenting it in `netlify.toml`
     noscript: [
       {
         innerHTML:
-          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">'
-      }
+          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">',
+      },
     ],
-    __dangerouslyDisableSanitizers: ['noscript']
+    __dangerouslyDisableSanitizers: ['noscript'],
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#526488' },
+  loading: { color: '#fd5e34' },
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/main.pcss'],
+  // css: ['@/assets/css/main.pcss'],
+  css: ['@/assets/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -87,69 +118,60 @@ export default {
         'postcss-preset-env': postcssPresetEnv({
           stage: 1,
           features: {
-            'nesting-rules': false
-          }
+            'nesting-rules': false,
+          },
         }),
-        'postcss-easing-gradients': postcssEasingGradients
-      }
+        'postcss-easing-gradients': postcssEasingGradients,
+      },
     },
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
   },
   /*
    ** Custom additions configuration
    */
   // ? The content property: https://content.nuxtjs.org/configuration
   content: {
-    dir: 'content'
+    dir: 'content',
   },
-  tailwindcss: {
-    viewer: false, // disabled because it causes `Error: Cannot find module 'tailwindcss/resolveConfig'`, fixed in https://github.com/nuxt-community/tailwindcss-module/pull/303
-    cssPath: '~/assets/css/main.pcss',
-    exposeConfig: false // enables `import { theme } from '~tailwind.config'`
-  },
-  purgeCSS: {
-    mode: 'postcss',
-    // ? Safelisting docs: https://purgecss.com/safelisting.html
-    safelist: {
-      // standard: [],
-      deep: [/dark/, /light/, /btn/, /icon/, /main/],
-      greedy: [
-        /^card/,
-        /image$/,
-        /title$/,
-        /^nuxt-content/,
-        /code/,
-        /pre/,
-        /token/,
-        /^vue-content-placeholders/
-      ]
-    }
-  },
-  colorMode: {
-    classSuffix: '',
-    preference: 'system', // default value of $colorMode.preference
-    fallback: COLOR_MODE_FALLBACK, // fallback value if not system preference found
-    componentName: 'ColorScheme',
-    cookie: {
-      options: {
-        sameSite: 'lax'
-      }
-    }
-  },
-  pwa: {
-    icon: {
-      source: 'static/icon.png',
-      filename: 'icon.png'
-    },
-    manifest: { name: SITE_INFO.sitename || process.env.npm_package_name || '', lang: process.env.lang },
-    meta: {
-      name: SITE_INFO.sitename || process.env.npm_package_name || '',
-      lang: process.env.lang,
-      ogHost: process.env.URL,
-      ogImage: '/preview.jpg'
-    }
-  }
+  // tailwindcss: {
+  //   viewer: false, // disabled because it causes `Error: Cannot find module 'tailwindcss/resolveConfig'`, fixed in https://github.com/nuxt-community/tailwindcss-module/pull/303
+  //   cssPath: '~/assets/css/main.pcss',
+  //   exposeConfig: false, // enables `import { theme } from '~tailwind.config'`
+  // },
+  // purgeCSS: {
+  //   mode: 'postcss',
+  //   // ? Safelisting docs: https://purgecss.com/safelisting.html
+  //   safelist: {
+  //     // standard: [],
+  //     deep: [/dark/, /light/, /btn/, /icon/, /main/],
+  //     greedy: [/^card/, /image$/, /title$/, /^nuxt-content/, /code/, /pre/, /token/, /^vue-content-placeholders/],
+  //   },
+  // },
+  // colorMode: {
+  //   classSuffix: '',
+  //   preference: 'system', // default value of $colorMode.preference
+  //   fallback: COLOR_MODE_FALLBACK, // fallback value if not system preference found
+  //   componentName: 'ColorScheme',
+  //   cookie: {
+  //     options: {
+  //       sameSite: 'lax',
+  //     },
+  //   },
+  // },
+  // pwa: {
+  //   icon: {
+  //     source: 'static/icon.png',
+  //     filename: 'icon.png',
+  //   },
+  //   manifest: { name: SITE_INFO.sitename || process.env.npm_package_name || '', lang: process.env.lang },
+  //   meta: {
+  //     name: SITE_INFO.sitename || process.env.npm_package_name || '',
+  //     lang: process.env.lang,
+  //     ogHost: process.env.URL,
+  //     ogImage: '/preview.jpg',
+  //   },
+  // },
 }

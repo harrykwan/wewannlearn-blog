@@ -1,0 +1,18 @@
+:root {
+  --wewannalearn-orange: #fd5e34;
+  --wewannalearn-blue: #007bff;
+}
+
+html,
+body {
+  background-color: var(--wewannalearn-orange);
+  color: white;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.pageroot {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
