@@ -1,5 +1,34 @@
 <template>
   <div class="row" v-if="posts.length > 0">
+    <div class="col-12">
+      <nuxt-link :to="`${posts[0].slug}`" class="postlist">
+        <template v-if="postType === 'projects'">
+          <span class="flex-1">
+            <h6 class="inline-block py-1 px-2 mr-1 bg-gray text-white text-sm font-medium rounded-sm">
+              {{ posts[0].category }}
+            </h6>
+            <h3 class="card-title">{{ posts[0].title }}</h3>
+            <p class="mt-2">{{ posts[0].description }}</p>
+          </span>
+          <img v-if="posts[0].cover" class="cover-image" :src="posts[0].cover" />
+        </template>
+
+        <template v-else>
+          <span class="w-full">
+            <span class="flex justify-between align-baseline">
+              <h3 class="card-title">{{ posts[0].title }}</h3>
+              <h6
+                v-if="posts[0].createdAt"
+                class="self-start inline-block mt-0 py-1 px-2 bg-gray text-white text-base font-medium rounded-sm whitespace-no-wrap"
+              >
+                {{ formatDate(posts[0].createdAt) }}
+              </h6>
+            </span>
+            <p class="mt-2">{{ posts[0].description }}</p>
+          </span>
+        </template>
+      </nuxt-link>
+    </div>
     <div class="col-md-4" v-for="(post, index) in posts" :key="index">
       <nuxt-link :to="`${post.slug}`" class="postlist">
         <template v-if="postType === 'projects'">

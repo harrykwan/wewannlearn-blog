@@ -2,9 +2,11 @@
   <div>
     <Header />
     <Trigobg />
-    <section v-if="posts" class="w-full max-w-5xl mx-auto">
-      <posts post-type="blog" :amount="100" />
-    </section>
+    <div class="whitesection">
+      <section v-if="posts" class="w-full max-w-5xl mx-auto postscontent">
+        <posts post-type="blog" :amount="100" />
+      </section>
+    </div>
     <Footer />
   </div>
 </template>
@@ -27,3 +29,16 @@ export default {
   components: { Header, Footer, Trigobg },
 }
 </script>
+<style scoped>
+.whitesection {
+  background: white;
+  width: 100vw;
+  color: black;
+  padding-top: 350px;
+  padding-bottom: 50px;
+}
+
+.postscontent {
+  margin-top: -50px;
+}
+</style>

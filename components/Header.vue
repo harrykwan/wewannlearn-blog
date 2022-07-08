@@ -73,6 +73,7 @@ export default {
 .topnav {
   z-index: 999;
   position: relative;
+  margin-bottom: 200px;
 }
 
 .menubutton {
@@ -83,6 +84,10 @@ export default {
   .headerlogo {
     margin-left: 30px;
     width: 150px;
+  }
+
+  .topnav {
+    margin-bottom: 50px;
   }
 
   .navlist {

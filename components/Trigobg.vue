@@ -18,26 +18,27 @@
 }
 
 .slash {
-  width: 500px;
-  top: -200px;
-  right: 0;
+  width: 300px;
+  top: -150px;
+  right: -100px;
 }
 
 .opentag {
-  left: -100px;
-  width: 400px;
-  top: 250px;
+  left: 250px;
+  width: 200px;
+  top: 80px;
 }
 
 .bubble {
-  top: 400px;
-  left: 100px;
+  top: 100px;
+  left: -100px;
   width: 450px;
 }
 
 .closetag {
-  left: calc(50vw + 300px);
-  width: 600px;
+  top: 100px;
+  right: -90px;
+  width: 260px;
 }
 
 @media screen and (max-width: 991px) {
