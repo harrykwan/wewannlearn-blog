@@ -2,6 +2,7 @@
 createdAt: 2021-03-01
 title: How to edit the content
 description: And what to expect when running a repo-based CMS
+cover: /img/header1mobile_doublestick.png
 ---
 
 It is easy to write **markdown**-*enabled* content like this placeholder text, with support for images and even code snippets.
