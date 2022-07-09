@@ -14,7 +14,7 @@
 .bubble {
   position: absolute;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .slash {

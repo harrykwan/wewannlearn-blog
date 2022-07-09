@@ -12,7 +12,7 @@
         <div class="">
           <ul class="navbar-nav ml-auto" style="">
             <li class="nav-item">
-              <a class="nav-link" href="https://wewannalearn.com/#aboutus">有關我們 </a>
+              <a class="nav-link" href="https://wewannalearn.com/#aboutus">有關我們</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://wewannalearn.com/#tutor">導師介紹</a>
@@ -107,7 +107,7 @@ export default {
   }
 
   .navunfocus {
-    opacity: 0.5;
+    opacity: 0.7;
     border-bottom: none !important;
   }
 

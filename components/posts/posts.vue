@@ -15,17 +15,23 @@
 
         <template v-else>
           <span class="w-full">
-            <img v-if="posts[0].cover" class="cover-image" :src="posts[0].cover" />
-            <span class="flex justify-between align-baseline">
-              <h3 class="card-title">{{ posts[0].title }}</h3>
-              <h6
-                v-if="posts[0].createdAt"
-                class="self-start inline-block mt-0 py-1 px-2 bg-gray text-white text-base font-medium rounded-sm whitespace-no-wrap"
-              >
-                {{ formatDate(posts[0].createdAt) }}
-              </h6>
+            <img v-if="posts[0].cover" class="cover-image big-cover" :src="posts[0].cover" />
+            <span class="cover-image cover-image-mask"></span>
+            <span class="big-cover-words">
+              <span class="flex justify-between align-baseline">
+                <h3 class="card-title big-cover-title">
+                  {{ posts[0].title }} <br />
+                  <button class="big-readmore">Read More</button>
+                </h3>
+                <!-- <h6
+                  v-if="posts[0].createdAt"
+                  class="self-start inline-block mt-0 py-1 px-2 bg-gray text-white text-base font-medium rounded-sm whitespace-no-wrap"
+                >
+                  {{ formatDate(posts[0].createdAt) }}
+                </h6> -->
+              </span>
+              <!-- <p class="mt-2">{{ posts[0].description }}</p> -->
             </span>
-            <p class="mt-2">{{ posts[0].description }}</p>
           </span>
         </template>
       </nuxt-link>
@@ -45,9 +51,10 @@
 
         <template v-else>
           <span class="w-full">
-            <img v-if="post.cover" class="cover-image" :src="post.cover" />
+            <img v-if="post.cover" class="cover-image small-cover" :src="post.cover" />
             <span class="flex justify-between align-baseline">
-              <h3 class="card-title">{{ post.title }}</h3>
+              <span v-if="post.tags">{{ post.tags }}</span>
+              <h3 class="card-title small-title">{{ post.title }}</h3>
               <h6
                 v-if="post.createdAt"
                 class="self-start inline-block mt-0 py-1 px-2 bg-gray text-white text-base font-medium rounded-sm whitespace-no-wrap"
@@ -55,7 +62,8 @@
                 {{ formatDate(post.createdAt) }}
               </h6>
             </span>
-            <p class="mt-2">{{ post.description }}</p>
+            <p class="">{{ post.description }}</p>
+            <button class="small-readmore">Read More</button>
           </span>
         </template>
       </nuxt-link>
@@ -137,5 +145,69 @@ export default {
 
 .toppost {
   margin-top: -430px;
+}
+
+.big-cover {
+  margin-bottom: 60px;
+  max-height: 540px;
+  height: 100%;
+}
+
+.big-cover-words {
+  position: absolute !important;
+  top: 0;
+  background: rgba(0, 0, 0, 0.264);
+  color: white;
+  max-width: 1024px;
+  width: 100%;
+  height: 100%;
+  max-height: 540px;
+}
+
+.big-cover-title {
+  bottom: 30px;
+  position: absolute;
+  margin-left: 30px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.cover-image-mask {
+  background: black;
+  display: block;
+  position: absolute;
+  width: 100%;
+}
+
+.small-cover {
+  height: 170px;
+  object-fit: cover;
+}
+
+.small-hashtag {
+}
+
+.small-title {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #fd5e34;
+  font-weight: bold;
+}
+
+.big-readmore {
+  background: #fd5e34;
+  color: white;
+  font-size: 18px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+.small-readmore {
+  background: #007bff;
+  color: white;
+  padding: 5px 18px;
+  border-radius: 20px;
+  margin-top: 20px;
 }
 </style>
