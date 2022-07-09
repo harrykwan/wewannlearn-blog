@@ -16,7 +16,6 @@
         <template v-else>
           <span class="w-full">
             <img v-if="posts[0].cover" class="cover-image big-cover" :src="posts[0].cover" />
-            <span class="cover-image cover-image-mask"></span>
             <span class="big-cover-words">
               <span class="flex justify-between align-baseline">
                 <h3 class="card-title big-cover-title">
@@ -36,37 +35,39 @@
         </template>
       </nuxt-link>
     </div>
-    <div class="col-md-4" v-for="(post, index) in posts" :key="index">
-      <nuxt-link :to="`${post.slug}`" class="postlist">
-        <template v-if="postType === 'projects'">
-          <img v-if="post.cover" class="cover-image" :src="post.cover" />
-          <span class="flex-1">
-            <h6 class="inline-block py-1 px-2 mr-1 bg-gray text-white text-sm font-medium rounded-sm">
-              {{ post.category }}
-            </h6>
-            <h3 class="card-title">{{ post.title }}</h3>
-            <p class="mt-2">{{ post.description }}</p>
-          </span>
-        </template>
-
-        <template v-else>
-          <span class="w-full">
-            <img v-if="post.cover" class="cover-image small-cover" :src="post.cover" />
-            <span class="flex justify-between align-baseline">
-              <span v-if="post.tags">{{ post.tags }}</span>
-              <h3 class="card-title small-title">{{ post.title }}</h3>
-              <h6
-                v-if="post.createdAt"
-                class="self-start inline-block mt-0 py-1 px-2 bg-gray text-white text-base font-medium rounded-sm whitespace-no-wrap"
-              >
-                {{ formatDate(post.createdAt) }}
+    <div class="smallposts row">
+      <div class="col-6 col-md-4" v-for="(post, index) in posts" :key="index">
+        <nuxt-link :to="`${post.slug}`" class="postlist">
+          <template v-if="postType === 'projects'">
+            <img v-if="post.cover" class="cover-image" :src="post.cover" />
+            <span class="flex-1">
+              <h6 class="inline-block py-1 px-2 mr-1 bg-gray text-white text-sm font-medium rounded-sm">
+                {{ post.category }}
               </h6>
+              <h3 class="card-title">{{ post.title }}</h3>
+              <p class="mt-2">{{ post.description }}</p>
             </span>
-            <p class="">{{ post.description }}</p>
-            <button class="small-readmore">Read More</button>
-          </span>
-        </template>
-      </nuxt-link>
+          </template>
+
+          <template v-else>
+            <span class="w-full">
+              <img v-if="post.cover" class="cover-image small-cover" :src="post.cover" />
+              <span class="flex justify-between align-baseline">
+                <span v-if="post.tags">{{ post.tags }}</span>
+                <h3 class="card-title small-title">{{ post.title }}</h3>
+                <!-- <h6
+                  v-if="post.createdAt"
+                  class="self-start inline-block mt-0 py-1 px-2 bg-gray text-white text-base font-medium rounded-sm whitespace-no-wrap"
+                >
+                  {{ formatDate(post.createdAt) }}
+                </h6> -->
+              </span>
+              <p class="small-description">{{ post.description }}</p>
+              <button class="small-readmore">Read More</button>
+            </span>
+          </template>
+        </nuxt-link>
+      </div>
     </div>
   </div>
   <div v-else-if="loading" class="cards">
@@ -150,18 +151,26 @@ export default {
 .big-cover {
   margin-bottom: 60px;
   max-height: 540px;
-  height: 100%;
+  height: auto;
 }
 
 .big-cover-words {
   position: absolute !important;
   top: 0;
-  background: rgba(0, 0, 0, 0.264);
+  background: rgba(0, 0, 0, 0.34);
   color: white;
   max-width: 1024px;
   width: 100%;
   height: 100%;
   max-height: 540px;
+}
+
+.smallposts {
+  max-width: 1054px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .big-cover-title {
@@ -170,13 +179,6 @@ export default {
   margin-left: 30px;
   font-size: 35px;
   font-weight: bold;
-}
-
-.cover-image-mask {
-  background: black;
-  display: block;
-  position: absolute;
-  width: 100%;
 }
 
 .small-cover {
@@ -209,5 +211,70 @@ export default {
   padding: 5px 18px;
   border-radius: 20px;
   margin-top: 20px;
+}
+
+@media screen and (max-width: 991px) {
+  .smallposts {
+    margin-top: -200px;
+    width: 95vw;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .big-cover {
+    /* height: auto; */
+    height: 200px;
+    object-fit: cover;
+    width: 95%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .big-cover-words {
+    height: 200px;
+    width: 95vw;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .small-cover {
+    /* height: auto; */
+    height: 100px;
+    object-fit: cover;
+    width: 45vw;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .big-cover-title {
+    font-size: 20px;
+    bottom: 0px;
+    margin-left: 15px;
+  }
+
+  .small-title {
+    font-size: 15px;
+  }
+
+  .big-readmore {
+    font-size: 13px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  .small-readmore {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-top: 12px;
+  }
 }
 </style>

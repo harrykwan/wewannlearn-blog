@@ -5,11 +5,11 @@
         <img class="headerlogo" src="~/assets/img/logo.png" />
       </div>
       <div class="ml-auto">
-        <button class="navbar-toggler" type="button" hidden>
+        <button @click="showmenu = !showmenu" class="navbar-toggler menubutton" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="">
+        <div :class="{ originalmenu: !showmenu, showmenu: showmenu }">
           <ul class="navbar-nav ml-auto" style="">
             <li class="nav-item">
               <a class="nav-link" href="https://wewannalearn.com/#aboutus">有關我們</a>
@@ -34,6 +34,11 @@
 <script>
 export default {
   setup() {},
+  data() {
+    return {
+      showmenu: false,
+    }
+  },
   mounted: function () {},
 }
 </script>
@@ -80,6 +85,51 @@ export default {
   display: none;
 }
 
+.navbar-nav {
+  flex-basis: auto;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+
+  /* display: block; */
+  padding: 0.5rem 1rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+}
+
+.nav-link {
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+}
+
+.originalmenu {
+  display: block;
+}
+
 @media screen and (max-width: 991px) {
   .headerlogo {
     margin-left: 30px;
@@ -87,7 +137,7 @@ export default {
   }
 
   .topnav {
-    margin-bottom: 50px;
+    margin-bottom: 200px;
   }
 
   .navlist {
@@ -106,6 +156,22 @@ export default {
     cursor: pointer;
   }
 
+  .nav-item {
+    /* display: block; */
+    /* padding: 0.5rem 1rem; */
+    width: 100px;
+    margin-right: 30px;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    display: block;
+    padding: 5px 10px;
+    display: inline-block;
+  }
+
   .navunfocus {
     opacity: 0.7;
     border-bottom: none !important;
@@ -121,44 +187,30 @@ export default {
 
     margin-right: 30px;
     font-size: 30px;
+    position: absolute;
+    right: 0;
   }
-}
 
-.nav-link {
-  color: rgba(255, 255, 255, 0.7);
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  display: block;
-  padding: 0.5rem 1rem;
-}
+  .navbar-nav {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: rgba(253, 96, 52, 0.8);
+    backdrop-filter: blur(4px);
+    margin-top: 50px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    margin-right: -30px;
+    margin-bottom: -70px;
+  }
 
-.navbar-nav {
-  flex-basis: auto;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  /* display: block; */
-  padding: 0.5rem 1rem;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
+  .showmenu {
+    display: block;
+  }
 
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  color: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.1);
+  .originalmenu {
+    display: none;
+  }
 }
 </style>
